@@ -1,6 +1,6 @@
 import { BigInt, log } from "@graphprotocol/graph-ts"
 import { EpnsNotificationCounter, EpnsPushNotification } from '../generated/schema'
-import { subgraphID } from "./mapping"
+import { subgraphID } from "./constanst"
 
 export function sendEPNSNotification(recipient: string, notification: string): void 
 {
