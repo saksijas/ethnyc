@@ -11,9 +11,8 @@
 5. `yarn deploy`
 
 **Link to the hosted service subgraph :**
-https://thegraph.com/hosted-service/subgraph/rtomas/lens-subgraph
 (there are some saved queries to play with the subgraph)
-
+Used existing example of graph for implementing additional functionalities!
 ---
 
 **Contract from the collection :**
