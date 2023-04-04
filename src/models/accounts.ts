@@ -1,26 +1,19 @@
 import { BigInt, Bytes } from '@graphprotocol/graph-ts'
-import { ZERO_ADDRESS, integer } from '@protofire/subgraph-toolkit'
 import { Account } from '../../generated/schema'
-import { stats } from './lens'
-import { profiles } from '../modules'
+import { ONE, ZERO } from '../helpers/constants'
 
 export namespace accounts {
-  export function getOrCreateAccount(accountAddress: Bytes): Account {
+  export function getAccount(accountAddress: Bytes): Account {
     let accountId = accountAddress.toHexString()
 
     let account = Account.load(accountId)
     if (account == null) {
       account = new Account(accountId)
       account.address = accountAddress
-      account.totalFollowings = integer.ZERO
+      account.totalFollowings = ZERO
       account.following = new Array<string>()
       account.profilesIds = new Array<string>()
-      //account.save()
-
-      // +1 amount of lens profiles
-      let lensInfo = stats.getOrCreateLensInfo()
-      lensInfo.totalAccounts = lensInfo.totalAccounts.plus(integer.ONE)
-      lensInfo.save()
+      account.save()
     }
     return account as Account
   }

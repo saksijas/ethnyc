@@ -1,9 +1,8 @@
-import { BigInt, log } from "@graphprotocol/graph-ts"
-import { EpnsNotificationCounter, EpnsPushNotification } from '../generated/schema'
-import { subgraphID } from "./constanst"
+import { BigInt, log } from '@graphprotocol/graph-ts'
+import { EpnsNotificationCounter, EpnsPushNotification } from '../../generated/schema'
+import { subgraphID } from './constants'
 
-export function sendEPNSNotification(recipient: string, notification: string): void 
-{
+export function sendEPNSNotification(recipient: string, notification: string): void {
   let id1 = subgraphID
   log.info('New id of EpnsNotificationCounter is: {}', [id1])
 
@@ -12,7 +11,7 @@ export function sendEPNSNotification(recipient: string, notification: string): v
     epnsNotificationCounter = new EpnsNotificationCounter(id1)
     epnsNotificationCounter.totalCount = BigInt.fromI32(0)
   }
-  epnsNotificationCounter.totalCount = (epnsNotificationCounter.totalCount).plus(BigInt.fromI32(1))
+  epnsNotificationCounter.totalCount = epnsNotificationCounter.totalCount.plus(BigInt.fromI32(1))
 
   let count = epnsNotificationCounter.totalCount.toHexString()
   let id2 = `${subgraphID}+${count}`

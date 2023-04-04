@@ -1,27 +1,3 @@
-type Stat @entity {
-  id: ID!
-  "Total profiles"
-  totalProfiles: BigInt!
-  "Total accounts"
-  totalAccounts: BigInt!
-  "Total Post"
-  totalPosts: BigInt!
-  "Total Comments"
-  totalComments: BigInt!
-  "Total Mirrors"
-  totalMirror: BigInt!
-  "Total Publicactions"
-  totalPublications: BigInt!
-  "Last Comment created"
-  lastCommentCreatedAt: BigInt
-  "Last Post created"
-  lastPostCreatedAt: BigInt
-  "Last Mirror created"
-  lastMirrorCreatedAt: BigInt
-  "Last Profile created"
-  lastProfileCreated: BigInt
-}
-
 type Profile @entity {
   id: ID!
   "Number of profile"
@@ -99,7 +75,7 @@ type Creator @entity {
 interface Publication @entity {
   id: ID!
   "Profile that created the publication"
-  fromProfile: Profile!
+  fromProfile: Profile
   "Publication Id"
   pubId: BigInt!
   referenceModule: Bytes!
@@ -111,7 +87,7 @@ interface Publication @entity {
 type Post implements Publication @entity {
   id: ID!
   "Profile that created the post"
-  fromProfile: Profile!
+  fromProfile: Profile
   "Publication Id"
   pubId: BigInt!
   referenceModule: Bytes!
@@ -132,7 +108,7 @@ type Post implements Publication @entity {
 type Mirror implements Publication @entity {
   id: ID!
   "Profile that created the post"
-  fromProfile: Profile!
+  fromProfile: Profile
   "Publication Id"
   pubId: BigInt!
   referenceModule: Bytes!
@@ -146,7 +122,7 @@ type Mirror implements Publication @entity {
 type Comment implements Publication @entity {
   id: ID!
   "Profile that created the post"
-  fromProfile: Profile!
+  fromProfile: Profile
   "Publication Id"
   pubId: BigInt!
   referenceModule: Bytes!
@@ -163,14 +139,11 @@ type Comment implements Publication @entity {
 
 type Follow @entity {
   id: ID!
-  "Follower Account. "
   fromAccount: Account
 
   fromProfileSTR: String
-  "Array of profiles that are followed"
   toProfile: [Profile!]
-  "Date from when the follow initiated"
-  timestamp: BigInt!
+  timestamp: BigInt
 }
 
 type FollowNFTTransferred @entity {
@@ -182,7 +155,6 @@ type FollowNFTTransferred @entity {
   timestamp: BigInt
   data: String
 }
-
 
 type EpnsNotificationCounter @entity {
   id: ID!

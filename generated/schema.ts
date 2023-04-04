@@ -11,160 +11,6 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Stat extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save Stat entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type Stat must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("Stat", id.toString(), this);
-    }
-  }
-
-  static load(id: string): Stat | null {
-    return changetype<Stat | null>(store.get("Stat", id));
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get totalProfiles(): BigInt {
-    let value = this.get("totalProfiles");
-    return value!.toBigInt();
-  }
-
-  set totalProfiles(value: BigInt) {
-    this.set("totalProfiles", Value.fromBigInt(value));
-  }
-
-  get totalAccounts(): BigInt {
-    let value = this.get("totalAccounts");
-    return value!.toBigInt();
-  }
-
-  set totalAccounts(value: BigInt) {
-    this.set("totalAccounts", Value.fromBigInt(value));
-  }
-
-  get totalPosts(): BigInt {
-    let value = this.get("totalPosts");
-    return value!.toBigInt();
-  }
-
-  set totalPosts(value: BigInt) {
-    this.set("totalPosts", Value.fromBigInt(value));
-  }
-
-  get totalComments(): BigInt {
-    let value = this.get("totalComments");
-    return value!.toBigInt();
-  }
-
-  set totalComments(value: BigInt) {
-    this.set("totalComments", Value.fromBigInt(value));
-  }
-
-  get totalMirror(): BigInt {
-    let value = this.get("totalMirror");
-    return value!.toBigInt();
-  }
-
-  set totalMirror(value: BigInt) {
-    this.set("totalMirror", Value.fromBigInt(value));
-  }
-
-  get totalPublications(): BigInt {
-    let value = this.get("totalPublications");
-    return value!.toBigInt();
-  }
-
-  set totalPublications(value: BigInt) {
-    this.set("totalPublications", Value.fromBigInt(value));
-  }
-
-  get lastCommentCreatedAt(): BigInt | null {
-    let value = this.get("lastCommentCreatedAt");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set lastCommentCreatedAt(value: BigInt | null) {
-    if (!value) {
-      this.unset("lastCommentCreatedAt");
-    } else {
-      this.set("lastCommentCreatedAt", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get lastPostCreatedAt(): BigInt | null {
-    let value = this.get("lastPostCreatedAt");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set lastPostCreatedAt(value: BigInt | null) {
-    if (!value) {
-      this.unset("lastPostCreatedAt");
-    } else {
-      this.set("lastPostCreatedAt", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get lastMirrorCreatedAt(): BigInt | null {
-    let value = this.get("lastMirrorCreatedAt");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set lastMirrorCreatedAt(value: BigInt | null) {
-    if (!value) {
-      this.unset("lastMirrorCreatedAt");
-    } else {
-      this.set("lastMirrorCreatedAt", Value.fromBigInt(<BigInt>value));
-    }
-  }
-
-  get lastProfileCreated(): BigInt | null {
-    let value = this.get("lastProfileCreated");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set lastProfileCreated(value: BigInt | null) {
-    if (!value) {
-      this.unset("lastProfileCreated");
-    } else {
-      this.set("lastProfileCreated", Value.fromBigInt(<BigInt>value));
-    }
-  }
-}
-
 export class Profile extends Entity {
   constructor(id: string) {
     super();
@@ -675,13 +521,21 @@ export class Post extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get fromProfile(): string {
+  get fromProfile(): string | null {
     let value = this.get("fromProfile");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set fromProfile(value: string) {
-    this.set("fromProfile", Value.fromString(value));
+  set fromProfile(value: string | null) {
+    if (!value) {
+      this.unset("fromProfile");
+    } else {
+      this.set("fromProfile", Value.fromString(<string>value));
+    }
   }
 
   get pubId(): BigInt {
@@ -880,13 +734,21 @@ export class Mirror extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get fromProfile(): string {
+  get fromProfile(): string | null {
     let value = this.get("fromProfile");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set fromProfile(value: string) {
-    this.set("fromProfile", Value.fromString(value));
+  set fromProfile(value: string | null) {
+    if (!value) {
+      this.unset("fromProfile");
+    } else {
+      this.set("fromProfile", Value.fromString(<string>value));
+    }
   }
 
   get pubId(): BigInt {
@@ -983,13 +845,21 @@ export class Comment extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get fromProfile(): string {
+  get fromProfile(): string | null {
     let value = this.get("fromProfile");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set fromProfile(value: string) {
-    this.set("fromProfile", Value.fromString(value));
+  set fromProfile(value: string | null) {
+    if (!value) {
+      this.unset("fromProfile");
+    } else {
+      this.set("fromProfile", Value.fromString(<string>value));
+    }
   }
 
   get pubId(): BigInt {
@@ -1180,13 +1050,21 @@ export class Follow extends Entity {
     }
   }
 
-  get timestamp(): BigInt {
+  get timestamp(): BigInt | null {
     let value = this.get("timestamp");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
   }
 
-  set timestamp(value: BigInt) {
-    this.set("timestamp", Value.fromBigInt(value));
+  set timestamp(value: BigInt | null) {
+    if (!value) {
+      this.unset("timestamp");
+    } else {
+      this.set("timestamp", Value.fromBigInt(<BigInt>value));
+    }
   }
 }
 

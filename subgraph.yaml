@@ -22,16 +22,6 @@ dataSources:
       eventHandlers:
         - event: ProfileCreated(indexed uint256,indexed address,indexed address,string,string,address,bytes,string,uint256)
           handler: handleProfileCreated
-        - event: FollowNFTURISet(indexed uint256,string,uint256)
-          handler: handleFollowNFTURISet
-        - event: ProfileImageURISet(indexed uint256,string,uint256)
-          handler: handleProfileImageURISet
-        - event: DispatcherSet(indexed uint256,indexed address,uint256)
-          handler: handleDispatcherSet
-        - event: ProfileCreatorWhitelisted(indexed address,indexed bool,uint256)
-          handler: handleProfileCreatorWhitelisted
-        - event: FollowModuleSet(indexed uint256,address,bytes,uint256)
-          handler: handleFollowModuleSet
         - event: PostCreated(indexed uint256,indexed uint256,string,address,bytes,address,bytes,uint256)
           handler: handlePostCreated
         - event: MirrorCreated(indexed uint256,indexed uint256,uint256,uint256,bytes,address,bytes,uint256)
@@ -42,6 +32,4 @@ dataSources:
           handler: handleFollowed
         - event: DefaultProfileSet(indexed address,indexed uint256,uint256)
           handler: handleDefaultProfileSet
-        - event: FollowNFTTransferred(indexed uint256,indexed uint256,address,address,uint256)
-          handler: handleFollowNFTTransferred
       file: ./src/mappings/index.ts
